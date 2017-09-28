@@ -15,6 +15,12 @@ class Burner(models.Model):
 	temperature = models.ForeignKey(Temperature, on_delete=models.CASCADE)
 	burner_state = models.ForeignKey(BurnerState, on_delete=models.CASCADE)
 
+class RequestBurner(models.Model):
+	burner_id = models.ForeignKey(Burner, on_delete=models.CASCADE)
+	new_temperature = models.ForeignKey(Temperature, on_delete=models.CASCADE)
+	new_burner_state = models.ForeignKey(BurnerState, on_delete=models.CASCADE)
+	hour = models.CharField(blank=False, max_length=45)
+
 class PanState(models.Model):
 	description = models.CharField(blank=False, max_length=45)
 

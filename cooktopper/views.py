@@ -1,10 +1,11 @@
-from rest_framework import viewsets
 from .serializers import StoveSerializer, BurnerStateSerializer, TemperatureSerializer
-from .serializers import BurnerSerializer, PanStateSerializer, PanSerializer
+from .serializers import BurnerSerializer, RequestBurnerSerializer, PanStateSerializer, PanSerializer
 from .serializers import ProgrammingTypeSerializer, ProgrammingDetailsSerializer
 from .serializers import ProgrammingSerializer, ShortcutSerializer
-from .models import Stove, BurnerState, Temperature, Burner, PanState, Pan
+from .models import Stove, BurnerState, Temperature, Burner, RequestBurner, PanState, Pan
 from .models import ProgrammingType, ProgrammingDetails, Programming, Shortcut
+from rest_framework import viewsets
+from rest_framework.response import Response
 
 class StoveViewSet(viewsets.ModelViewSet):
 	queryset = Stove.objects.all()
@@ -21,6 +22,10 @@ class TemperatureViewSet(viewsets.ModelViewSet):
 class BurnerViewSet(viewsets.ModelViewSet):
 	queryset = Burner.objects.all()
 	serializer_class = BurnerSerializer
+
+class RequestBurnerViewSet(viewsets.ModelViewSet):
+	queryset = RequestBurner.objects.all()
+	serializer_class = RequestBurnerSerializer
 
 class PanStateViewSet(viewsets.ModelViewSet):
 	queryset = PanState.objects.all()

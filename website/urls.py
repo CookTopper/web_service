@@ -18,7 +18,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
 from cooktopper.views import StoveViewSet, BurnerStateViewSet, TemperatureViewSet, BurnerViewSet
-from cooktopper.views import PanStateViewSet, PanViewSet, ProgrammingTypeViewSet
+from cooktopper.views import RequestBurnerViewSet, PanStateViewSet, PanViewSet, ProgrammingTypeViewSet
 from cooktopper.views import ProgrammingDetailsViewSet, ProgrammingViewSet, ShortcutViewSet
 
 router = DefaultRouter()
@@ -26,6 +26,7 @@ router.register(r'stove', StoveViewSet, base_name='stove')
 router.register(r'burner_state', BurnerStateViewSet, base_name='burner_state')
 router.register(r'temperature', TemperatureViewSet, base_name='temperature')
 router.register(r'burner', BurnerViewSet, base_name='burner')
+router.register(r'request_burner', RequestBurnerViewSet, base_name='request_burner')
 router.register(r'pan_state', PanStateViewSet, base_name='pan_state')
 router.register(r'pan', PanViewSet, base_name='pan')
 router.register(r'programming_type', ProgrammingTypeViewSet, base_name='programming_type')

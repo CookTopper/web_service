@@ -1,4 +1,4 @@
-from models import Stove, BurnerState, Temperature, Burner, PanState, Pan, ProgrammingType, ProgrammingDetails, Programming, Shortcut
+from cooktopper.models import Stove, BurnerState, Temperature, Burner, RequestBurner, PanState, Pan, ProgrammingType, ProgrammingDetails, Programming, Shortcut
 from rest_framework import serializers
 
 class StoveSerializer(serializers.ModelSerializer):
@@ -35,6 +35,17 @@ class BurnerSerializer(serializers.ModelSerializer):
             'temperature',
             'burner_state'
         ]
+
+class RequestBurnerSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = RequestBurner
+		fields = [
+			'id',
+			'burner_id',
+			'new_temperature',
+			'new_burner_state',
+			'hour'
+		]
 
 class PanStateSerializer(serializers.ModelSerializer):
     class Meta:
