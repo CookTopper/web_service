@@ -16,11 +16,27 @@ class BurnerStateViewSet(viewsets.ModelViewSet):
 	serializer_class = BurnerStateSerializer
 
 class TemperatureViewSet(viewsets.ModelViewSet):
-	queryset = Temperature.objects.all()
+	def get_queryset(self):
+		queryset = Temperature.objects.all()
+		temperature_id = self.request.query_params.get('id', None)
+
+		if temperature_id is not None:
+			queryset = queryset.filter(id=temperature_id)
+
+		return queryset
+
 	serializer_class = TemperatureSerializer
 
 class BurnerViewSet(viewsets.ModelViewSet):
-	queryset = Burner.objects.all()
+	def get_queryset(self):
+		queryset = Burner.objects.all()
+		burner_id = self.request.query_params.get('id', None)
+
+		if burner_id is not None:
+			queryset = queryset.filter(id=burner_id)
+
+		return queryset
+
 	serializer_class = BurnerSerializer
 
 class RequestBurnerViewSet(viewsets.ModelViewSet):
