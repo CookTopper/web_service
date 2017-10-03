@@ -44,7 +44,7 @@ class RequestBurnerSerializer(serializers.ModelSerializer):
 			'burner_id',
 			'new_temperature',
 			'new_burner_state',
-			'hour'
+			'new_time'
 		]
 
 class PanStateSerializer(serializers.ModelSerializer):

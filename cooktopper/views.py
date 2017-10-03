@@ -12,7 +12,15 @@ class StoveViewSet(viewsets.ModelViewSet):
 	serializer_class = StoveSerializer
 
 class BurnerStateViewSet(viewsets.ModelViewSet):
-	queryset = BurnerState.objects.all()
+	def get_queryset(self):
+		queryset = BurnerState.objects.all()
+		burner_state_id = self.request.query_params.get('id', None)
+
+		if burner_state_id is not None:
+			queryset = queryset.filter(id=burner_state_id)
+
+		return queryset
+
 	serializer_class = BurnerStateSerializer
 
 class TemperatureViewSet(viewsets.ModelViewSet):
@@ -40,7 +48,15 @@ class BurnerViewSet(viewsets.ModelViewSet):
 	serializer_class = BurnerSerializer
 
 class RequestBurnerViewSet(viewsets.ModelViewSet):
-	queryset = RequestBurner.objects.all()
+	def get_queryset(self):
+		queryset = RequestBurner.objects.all()
+		request_burner_id = self.request.query_params.get('id', None)
+
+		if request_burner_id is not None:
+			queryset = queryset.filter(id=request_burner_id)
+
+		return queryset
+
 	serializer_class = RequestBurnerSerializer
 
 class PanStateViewSet(viewsets.ModelViewSet):
