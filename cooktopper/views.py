@@ -26,10 +26,14 @@ class BurnerStateViewSet(viewsets.ModelViewSet):
 class TemperatureViewSet(viewsets.ModelViewSet):
 	def get_queryset(self):
 		queryset = Temperature.objects.all()
+
 		temperature_id = self.request.query_params.get('id', None)
+		temperature_description = self.request.query_params.get('description', None)
 
 		if temperature_id is not None:
 			queryset = queryset.filter(id=temperature_id)
+		elif temperature_description is not None:
+			queryset = queryset.filter(description=temperature_description)
 
 		return queryset
 
@@ -38,10 +42,14 @@ class TemperatureViewSet(viewsets.ModelViewSet):
 class BurnerViewSet(viewsets.ModelViewSet):
 	def get_queryset(self):
 		queryset = Burner.objects.all()
+
 		burner_id = self.request.query_params.get('id', None)
+		burner_description = self.request.query_params.get('description', None)
 
 		if burner_id is not None:
 			queryset = queryset.filter(id=burner_id)
+		elif burner_description is not None:
+			queryset = queryset.filter(description=burner_description)
 
 		return queryset
 
