@@ -15,9 +15,13 @@ class BurnerStateViewSet(viewsets.ModelViewSet):
 	def get_queryset(self):
 		queryset = BurnerState.objects.all()
 		burner_state_id = self.request.query_params.get('id', None)
+		burner_state_description = self.request.query_params.get('description', None)
 
 		if burner_state_id is not None:
 			queryset = queryset.filter(id=burner_state_id)
+
+		if burner_state_description is not None:
+			queryset = queryset.filter(description=burner_state_description)
 
 		return queryset
 
