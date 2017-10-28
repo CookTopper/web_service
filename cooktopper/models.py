@@ -19,7 +19,7 @@ class RequestBurner(models.Model):
 	burner_id = models.ForeignKey(Burner, on_delete=models.CASCADE)
 	new_temperature = models.ForeignKey(Temperature, on_delete=models.CASCADE)
 	new_burner_state = models.ForeignKey(BurnerState, on_delete=models.CASCADE)
-	new_time = models.IntegerField()
+	programmed_time = models.IntegerField()
 
 class PanState(models.Model):
 	description = models.CharField(blank=False, max_length=45)
@@ -29,14 +29,11 @@ class Pan(models.Model):
 	temperature = models.IntegerField()
 	pan_state = models.ForeignKey(PanState, on_delete=models.CASCADE)
 
-class ProgrammingType(models.Model):
-	description = models.CharField(blank=False, max_length=45)
-
 class ProgrammingDetails(models.Model):
-	programmed_hour = models.CharField(blank=False, max_length=45)
+	programmed_time = models.CharField(blank=False, max_length=45)
 	expected_duration = models.IntegerField()
-	programming_type = models.ForeignKey(ProgrammingType, on_delete=models.CASCADE)
 	temperature = models.ForeignKey(Temperature, on_delete=models.CASCADE)
+	new_burner_state = models.ForeignKey(BurnerState, on_delete=models.CASCADE)
 
 class Programming(models.Model):
 	burner = models.ForeignKey(Burner, on_delete=models.CASCADE)
