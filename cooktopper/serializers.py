@@ -1,4 +1,4 @@
-from cooktopper.models import Stove, BurnerState, Temperature, Burner, RequestBurner, PanState, Pan, ProgrammingDetails, Programming, Shortcut
+from cooktopper.models import Stove, BurnerState, Temperature, Burner, RequestBurner, PanState, Pan, Programming, Shortcut
 from rest_framework import serializers
 
 class StoveSerializer(serializers.ModelSerializer):
@@ -6,7 +6,8 @@ class StoveSerializer(serializers.ModelSerializer):
         model = Stove
         fields = [
             'id',
-            'token'
+            'token',
+			'mac_address'
         ]
 
 class BurnerStateSerializer(serializers.ModelSerializer):
@@ -33,7 +34,8 @@ class BurnerSerializer(serializers.ModelSerializer):
             'description',
             'stove',
             'temperature',
-            'burner_state'
+            'burner_state',
+			'time'
         ]
 
 class RequestBurnerSerializer(serializers.ModelSerializer):
@@ -44,7 +46,8 @@ class RequestBurnerSerializer(serializers.ModelSerializer):
 			'burner_id',
 			'new_temperature',
 			'new_burner_state',
-			'programmed_time'
+			'programmed_time',
+			'programming_id'
 		]
 
 class PanStateSerializer(serializers.ModelSerializer):
@@ -65,24 +68,16 @@ class PanSerializer(serializers.ModelSerializer):
             'pan_state'
         ]
 
-class ProgrammingDetailsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProgrammingDetails
-        fields = [
-            'id',
-            'programmed_time',
-            'expected_duration',
-            'temperature',
-			'new_burner_state'
-        ]
-
 class ProgrammingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Programming
         fields = [
             'id',
-            'burner',
-            'programming_details'
+            'temperature',
+            'burner_state',
+			'programmed_time',
+			'expected_duration',
+			'creation_time'
         ]
 
 class ShortcutSerializer(serializers.ModelSerializer):
@@ -91,5 +86,5 @@ class ShortcutSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'description',
-            'programming_details'
+            'programming'
         ]
