@@ -1,4 +1,4 @@
-from cooktopper.models import Stove, BurnerState, Temperature, Burner, RequestBurner, PanState, Pan, Programming, Shortcut
+from cooktopper.models import Stove, BurnerState, Temperature, Burner, RequestBurner, PanState, Pan, Programming, Shortcut, SmokeSensor
 from rest_framework import serializers
 
 class StoveSerializer(serializers.ModelSerializer):
@@ -88,3 +88,11 @@ class ShortcutSerializer(serializers.ModelSerializer):
             'description',
             'programming'
         ]
+
+class SmokeSensorSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = SmokeSensor
+		fields = [
+			'id',
+			'smoke_level'
+		]

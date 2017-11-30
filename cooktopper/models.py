@@ -42,3 +42,6 @@ class Programming(models.Model):
 class Shortcut(models.Model):
 	description = models.CharField(blank=False, max_length=45)
 	programming = models.ForeignKey(Programming, on_delete=models.CASCADE)
+
+class SmokeSensor(models.Model):
+	smoke_level = models.IntegerField()

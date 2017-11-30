@@ -1,8 +1,8 @@
 from .serializers import StoveSerializer, BurnerStateSerializer, TemperatureSerializer
 from .serializers import BurnerSerializer, RequestBurnerSerializer, PanStateSerializer, PanSerializer
-from .serializers import ProgrammingSerializer, ShortcutSerializer
+from .serializers import ProgrammingSerializer, ShortcutSerializer, SmokeSensorSerializer
 from .models import Stove, BurnerState, Temperature, Burner, RequestBurner, PanState, Pan
-from .models import Programming, Shortcut
+from .models import Programming, Shortcut, SmokeSensor
 from rest_framework import viewsets
 from rest_framework.response import Response
 
@@ -87,9 +87,21 @@ class PanViewSet(viewsets.ModelViewSet):
 	serializer_class = PanSerializer
 
 class ProgrammingViewSet(viewsets.ModelViewSet):
-	queryset = Programming.objects.all()
+	def get_queryset(self):
+		queryset = Programming.objects.all()
+		request_creation_time = self.request.query_params.get('creation_time', None)
+
+		if request_creation_time is not None:
+			queryset = queryset.filter(creation_time=request_creation_time)
+
+		return queryset
+
 	serializer_class = ProgrammingSerializer
 
 class ShortcutViewSet(viewsets.ModelViewSet):
 	queryset = Shortcut.objects.all()
 	serializer_class = ShortcutSerializer
+
+class SmokeSensorViewSet(viewsets.ModelViewSet):
+	queryset = SmokeSensor.objects.all()
+	serializer_class = SmokeSensorSerializer
